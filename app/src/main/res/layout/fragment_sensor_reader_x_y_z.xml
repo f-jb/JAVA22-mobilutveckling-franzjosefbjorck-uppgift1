@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sensorXYZ"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SensorReaderXYZ">
+
+    <TextView
+        android:id="@+id/xView"
+        android:layout_width="99dp"
+        android:layout_height="wrap_content"
+        android:text="@string/xView" />
+
+    <TextView
+        android:id="@+id/yView"
+        android:layout_width="121dp"
+        android:layout_height="wrap_content"
+        android:text="@string/yView" />
+
+    <TextView
+        android:id="@+id/zView"
+        android:layout_width="129dp"
+        android:layout_height="wrap_content"
+        android:text="@string/zView" />
+
+</LinearLayout>

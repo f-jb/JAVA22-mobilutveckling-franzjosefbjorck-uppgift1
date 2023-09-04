@@ -1,6 +1,7 @@
 package com.example.shakerv2;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.graphics.Color;
 import android.hardware.Sensor;
@@ -21,37 +22,30 @@ public class AccelerometerGameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accelerometer_game);
-        /*
-        TextView xView = findViewById(R.id.xView);
-        TextView yView = findViewById(R.id.yView);
-        TextView zView = findViewById(R.id.zView);
 
-         */
         Button back = findViewById(R.id.backButton);
-
         Spinner difficulty = findViewById(R.id.gameDifficulty);
-
-
 
         View accelerometerBackground = findViewById(R.id.accelerometerBackground);
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         Sensor accelerometer = (Sensor) sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .setReorderingAllowed(true)
+                .add(R.id.fragmentContainerView, SensorReaderXYZ.class, null, "sensorView")
+                .commit();
         SensorEventListener listener = new SensorEventListener() {
             @Override
             public void onSensorChanged(SensorEvent sensorEvent) {
                 int gameRatio =  Integer.valueOf(difficulty.getSelectedItem().toString());
 
-
                 int xValue =  (int) Math.abs(sensorEvent.values[0]) * gameRatio;
                 int yValue = (int) Math.abs(sensorEvent.values[1]) * gameRatio;
                 int zValue = (int) Math.abs(sensorEvent.values[2]) * gameRatio;
                 int totalValue = xValue + yValue + zValue;
-                /*
-                xView.setText(String.valueOf(xValue));
-                yView.setText(String.valueOf(yValue));
-                zView.setText(String.valueOf(zValue));
+                SensorReaderXYZ sensorReaderXYZ = (SensorReaderXYZ) fragmentManager.findFragmentByTag("sensorView");
+                sensorReaderXYZ.setXYZ(xValue,yValue,zValue);
 
-                 */
                 if(totalValue >= 100 ){
                     Toast.makeText(AccelerometerGameActivity.this, "WOw! So much fastness", Toast.LENGTH_LONG).show();
                 }

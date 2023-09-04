@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,9 +57,9 @@ public class SensorReaderXYZ extends Fragment {
         return fragment;
     }
     public void setXYZ(int x, int y, int z){
-        xView.setText(x);
-        yView.setText(y);
-        zView.setText(z);
+        xView.setText(String.valueOf(x));
+        yView.setText(String.valueOf(y));
+        zView.setText(String.valueOf(z));
 
     }
 
